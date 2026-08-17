@@ -38,6 +38,7 @@ llama-server.exe \
 | 7K 长 prompt gen | 40.0 t/s |
 | 上下文 | 24576 tokens/单slot (vs 8192, **3倍**) |
 | 2 请求并发组合吞吐 | **62.2 t/s** (每请求 31.1 × 2, vs 单请求 42.5, +44%) |
+| **重复请求 (cache_prompt)** | **0.56-1.00s vs 1.40-3.14s (3倍提速)** 🆕 |
 | VRAM | ~7.6GB / 8GB |
 
 ## 📁 目录
@@ -50,6 +51,7 @@ llama-server.exe \
 | [docs/hardware-boundaries.md](docs/hardware-boundaries.md) | 硬件瓶颈调查（串行/PCIe/新方案） |
 | [docs/decision-tree.md](docs/decision-tree.md) | 优化决策树 |
 | [docs/crash-incident-20260817.md](docs/crash-incident-20260817.md) | 🚨 0xC0000374 崩溃事故全解 + 2×36864 A/B |
+| [docs/prompt-cache-20260817.md](docs/prompt-cache-20260817.md) | 🏆 cache_prompt 3倍提速 + CPU 双slot全系 A/B |
 
 ## ⚡ 快速收益点（按性价比排序）
 
@@ -63,6 +65,7 @@ llama-server.exe \
 
 | 版本 | 变更 | 日期 |
 |---|---|---|
+| v16.2 | 🏆 cache_prompt 3倍提速 (重复请求 3.14s→0.98s) + CPU 双slot全系 A/B | 2026-08-17 |
 | v16.1 | 🚨 0xC0000374 崩溃事故全解（并发 CUDA 初始化 + 快速启动伪重启） | 2026-08-17 |
 | v16.0 | `-ub 2048` prefill +40% | 2026-08-16 |
 | v15.0 | `-kvu -c 24576` 上下文 3 倍 | 2026-08-16 |
